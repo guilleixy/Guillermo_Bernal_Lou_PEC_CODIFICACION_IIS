@@ -1,0 +1,30 @@
+@startuml diagrama_estado_reserva
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de estado de Reserva
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #FAFAFA
+  BorderColor #000000
+  FontName Helvetica
+}
+
+[*] --> Pendiente : T1: <<create>> /\ninicializar(día, mes, año, hora, minuto,\nduracionAjustada, idPunto, numeroSecuencial)
+
+state "Pendiente" as Pendiente {
+  Pendiente : datos asignados,
+  Pendiente : aún no insertada
+}
+
+state "Confirmada" as Confirmada {
+  Confirmada : insertada en la
+  Confirmada : SecuenciaReservas del punto
+}
+
+Pendiente --> Confirmada : T2: SecuenciaReservas.insertar(reserva, false) [true]
+Pendiente --> [*] : T3: SecuenciaReservas.insertar(reserva, false) [false] /\n<<destroy>>
+Confirmada --> [*] : T4: <<destroy>>\n(al destruir el PuntoRecarga propietario)
+
+@enduml

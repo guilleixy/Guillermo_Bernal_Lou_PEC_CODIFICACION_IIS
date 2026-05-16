@@ -1,0 +1,38 @@
+@startuml diagrama_casos_uso
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de casos de uso
+' Especificación normativa (referencia para reproducir en ArgoUML).
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam usecase {
+  BackgroundColor #FAFAFA
+  BorderColor #000000
+  ArrowColor #000000
+  FontName Helvetica
+}
+skinparam actor {
+  BackgroundColor #FAFAFA
+  BorderColor #000000
+  FontName Helvetica
+}
+
+left to right direction
+
+actor "Operador" as Op
+
+rectangle "GesELECTRERA" {
+  usecase "UC-01\nEditar electrolinera" as UC01
+  usecase "UC-02\nEditar punto de recarga" as UC02
+  usecase "UC-03\nReservar punto de recarga" as UC03
+  usecase "UC-04\nListar reservas\nde electrolinera" as UC04
+  usecase "UC-05\nListar servicio mensual\nde punto de recarga" as UC05
+}
+
+Op -- UC01
+Op -- UC02
+Op -- UC03
+Op -- UC04
+Op -- UC05
+
+@enduml

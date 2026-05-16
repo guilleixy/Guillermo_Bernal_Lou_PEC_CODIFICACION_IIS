@@ -1,0 +1,55 @@
+@startuml diagrama_colaboracion_uc03
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de colaboración: Reservar punto de recarga
+' Notación: '*' indica mensaje iterativo dentro del bucle
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam objectFontName Helvetica
+skinparam objectFontSize 11
+
+object Operador
+object ":GesELECTRERA" as Aplicacion
+object ":Gestor" as Gestor
+object ":Electrolinera" as Electrolinera
+object ":Punto[i]" as Punto
+object ":SecuenciaReservas" as SecuenciaReservas
+object ":Reserva" as Reserva
+
+Operador --> Aplicacion : 1, 2: datos
+Aplicacion --> Gestor : 3: existeElectrolinera(idElectrolinera)
+Gestor --> Aplicacion : 4: true
+Aplicacion --> Gestor : 5: reservarPuntoRecarga(...)
+Gestor --> Electrolinera : 6: reservarPuntoRecarga(nivel, ...)
+
+' Bucle de búsqueda
+Electrolinera --> Punto : 7*: nivel()
+Punto --> Electrolinera : 8*: Nivel
+Electrolinera --> Punto : 9*: reservar(...)
+Punto --> Reserva : 10*: <<create>>
+Punto --> Reserva : 11*: inicializar(...)
+Punto --> SecuenciaReservas : 12*: insertar(reserva, false)
+
+' Alternativa positiva
+SecuenciaReservas --> Punto : 13.1*: true
+Punto --> Electrolinera : 13.2*: reserva
+
+' Alternativa negativa
+SecuenciaReservas --> Punto : 14.1*: false
+Punto --> Reserva : 14.2*: <<destroy>>
+Punto --> Electrolinera : 14.3*: null
+
+' Flujo final - reserva conseguida
+Electrolinera --> Gestor : 15.1: reserva
+Gestor --> Aplicacion : 15.2: reserva
+Aplicacion --> Reserva : 15.3: identificador(nivel)
+Reserva --> Aplicacion : 15.4: identificador formateado
+Aplicacion --> Operador : 15.5: confirmación
+
+' Flujo final - sin disponibilidad
+Electrolinera --> Gestor : 16.1: null
+Gestor --> Aplicacion : 16.2: null
+Aplicacion --> Operador : 16.3: "reserva no se puede realizar"
+
+@enduml

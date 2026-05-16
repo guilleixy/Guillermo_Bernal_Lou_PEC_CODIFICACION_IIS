@@ -1,0 +1,164 @@
+@startuml diagrama_clases
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de clases
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam classAttributeIconSize 0
+skinparam classFontName Helvetica
+skinparam classFontSize 11
+skinparam shadowing false
+skinparam linetype ortho
+
+' ===== Enumeraciones =====
+enum TipoEstacion {
+  Urbana
+  Ruta
+  Mixta
+}
+
+enum Corriente {
+  AC
+  DC
+}
+
+enum Nivel {
+  Nivel1
+  Nivel2
+  Nivel3
+}
+
+' ===== Clases =====
+class GesELECTRERA {
+  - gestor: GestorElectrolineras
+  --
+  + ejecutar()
+}
+
+class GestorElectrolineras {
+  - electrolineras: Electrolinera [0..10]
+  + NumElectrolinerasMax: int = 10 {readOnly}
+  --
+  + inicializar()
+  + existeElectrolinera(idElectrolinera): bool
+  + obtenerElectrolinera(idElectrolinera): Electrolinera
+  + crearOActualizarElectrolinera(...): ResultadoEdicion
+  + darDeBajaElectrolinera(idElectrolinera): bool
+  + editarPuntoRecarga(...): ResultadoEdicion
+  + reservarPuntoRecarga(...): Reserva
+  + listarReservasElectrolinera(...): ListadoReservas
+  + construirEtiquetasOcupacionMensual(...): EtiquetasOcupacion
+}
+
+class Electrolinera {
+  - id: int  {1..10}
+  - nombre: String  {longitud 1..20}
+  - numPuntosNivel1: int
+  - numPuntosNivel2: int
+  - numPuntosNivel3: int
+  - tipo: TipoEstacion
+  - ubicacion: Coordenadas
+  - puntos: PuntoRecarga [0..20]
+  + NumPuntosRecargaMax: int = 20 {readOnly}
+  --
+  + inicializar(id: int)
+  + destruir()
+  + editar(nombre, n1, n2, n3, tipo, ubicacion)
+  + editarPunto(idPunto, corriente, potencia, rodaja): ResultadoEdicion
+  + totalPuntosDeclarados(): int
+  + contarPuntosConfiguradosNivel(nivel): int
+  + reservarPuntoRecarga(nivel, ...): Reserva
+  + listarReservasMes(mes, ano): ListadoReservas
+  + nombre(): String
+  + puntoRecarga(idPunto): PuntoRecarga
+}
+
+class PuntoRecarga {
+  - id: int  {1..20}
+  - corriente: Corriente
+  - potencia: int  {kW, > 0}
+  - rodaja: int  {minutos, > 0}
+  - contadorReservas: int = 0
+  - reservas: SecuenciaReservas
+  --
+  + inicializar(id: int)
+  + destruir()
+  + editar(corriente, potencia, rodaja)
+  + nivel(): Nivel
+  + rodaja(): int
+  + reservar(...): Reserva
+  + ocupacionDia(dia, mes, ano): int
+  + primeraReserva(): Reserva
+  + siguienteReserva(): Reserva
+  + finReservas(): bool
+}
+
+class Reserva {
+  - dia: int
+  - mes: int
+  - ano: int
+  - hora: int
+  - minuto: int
+  - duracion: int  {múltiplo de la rodaja}
+  - idPunto: int
+  - numeroSecuencial: int
+  --
+  + inicializar(...)
+  + identificador(nivel: Nivel): String
+  + instanteInicio(): Instante
+  + instanteFin(): Instante
+  + dia(): int
+  + mes(): int
+  + ano(): int
+  + hora(): int
+  + minuto(): int
+  + duracion(): int
+  + idPunto(): int
+}
+
+class SecuenciaReservas {
+  --
+  + inicializar()
+  + destruir()
+  + insertar(reserva, permitirSolapamiento): bool
+  + estaVacia(): bool
+  + primera(): Reserva
+  + siguiente(): Reserva
+  + enFin(): bool
+}
+
+class Coordenadas {
+  - latitud
+  - longitud
+  --
+  + latitud()
+  + longitud()
+}
+
+class CalendarioMes {
+  - margenIzquierdo: int = 0
+  --
+  + inicializar()
+  + establecerMargen(margen: int)
+  + imprimir(mes, ano, etiquetas)
+}
+
+' ===== Relaciones =====
+GesELECTRERA "1" --> "1" GestorElectrolineras : gestor
+
+GestorElectrolineras "1" *-- "0..10" Electrolinera : electrolineras
+
+Electrolinera "1" *-- "1" Coordenadas : ubicacion
+Electrolinera --> TipoEstacion : tipo
+Electrolinera "1" *-- "0..20" PuntoRecarga : puntos
+
+PuntoRecarga --> Corriente : corriente
+PuntoRecarga ..> Nivel : <<use>>
+PuntoRecarga "1" *-- "1" SecuenciaReservas : reservas
+PuntoRecarga "1" *-- "*" Reserva
+
+SecuenciaReservas o-- "*" Reserva
+
+GesELECTRERA ..> CalendarioMes : <<use>>
+
+@enduml

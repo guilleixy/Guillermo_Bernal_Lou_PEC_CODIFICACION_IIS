@@ -1,0 +1,27 @@
+@startuml diagrama_estado_electrolinera
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de estado de Electrolinera
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #FAFAFA
+  BorderColor #000000
+  FontName Helvetica
+}
+
+[*] --> Activa : T1: <<create>> / inicializar(id) / editar(...)
+
+state "Activa" as Activa {
+  Activa : la electrolinera existe en el sistema,
+  Activa : con su id, capacidades declaradas
+  Activa : y conjunto de puntos
+}
+
+Activa --> Activa : T2: editar(...)\n(modificación de datos básicos)
+Activa --> Activa : T3: editarPunto(...)\n(alta o modificación de punto, válido)
+Activa --> Activa : T4: reservarPuntoRecarga(...),\nlistarReservasMes(...)
+Activa --> [*] : T5: darDeBajaElectrolinera(id) [suma de puntos = 0] /\ndestruir() / <<destroy>>
+
+@enduml

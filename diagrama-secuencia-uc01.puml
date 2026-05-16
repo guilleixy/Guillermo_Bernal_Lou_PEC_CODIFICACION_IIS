@@ -1,0 +1,38 @@
+@startuml diagrama_secuencia_uc01
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de secuencia UC-01 Editar electrolinera
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+actor Operador as Op
+participant ":GesELECTRERA" as M
+participant ":Gestor" as G
+participant ":Electrolinera" as E
+
+Op -> M : 1: seleccionar "E"
+Op -> M : 2: datos completos\n(idElectrolinera, nombre,\nn1, n2, n3, tipo, ubicacion)
+
+alt n1+n2+n3 = 0 y electrolinera existe : flujo de baja
+  M -> G : 3.1: darDeBajaElectrolinera(idElectrolinera)
+  G -> E : 3.2: destruir()
+  G -> E !! : 3.3: <<destroy>>
+  G --> M : 3.4: true
+  M --> Op : 3.5: "dada de baja"
+else flujo principal de alta o modificación
+  M -> G : 4.1: crearOActualizarElectrolinera(...)
+  opt no existe previamente : alta
+    create E
+    G -> E : 4.2: <<create>>
+    G -> E : 4.3: inicializar(idElectrolinera)
+  end
+  G -> E : 4.4: editar(nombre, n1, n2, n3, tipo, ubicacion)
+  G --> M : 4.5: ResultadoEdicion
+  M --> Op : 4.6: "creada/modificada"
+end
+
+@enduml

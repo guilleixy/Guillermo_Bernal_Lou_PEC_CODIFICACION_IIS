@@ -1,0 +1,34 @@
+@startuml diagrama_colaboracion_uc01
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de colaboración: Editar electrolinera
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam objectFontName Helvetica
+skinparam objectFontSize 11
+
+object Operador
+object ":GesELECTRERA" as Aplicacion
+object ":Gestor" as Gestor
+object ":Electrolinera" as Electrolinera
+
+Operador --> Aplicacion : 1: seleccionar "E"
+Operador --> Aplicacion : 2: datos completos\n(idElectrolinera, nombre, n1, n2, n3, tipo, ubicacion)
+
+' Flujo de baja [n1+n2+n3 = 0 y existe]
+Aplicacion --> Gestor : 3.1: darDeBajaElectrolinera(idElectrolinera)
+Gestor --> Electrolinera : 3.2: destruir()
+Gestor --> Electrolinera : 3.3: <<destroy>>
+Gestor --> Aplicacion : 3.4: true
+Aplicacion --> Operador : 3.5: "dada de baja"
+
+' Flujo principal de alta o modificación
+Aplicacion --> Gestor : 4.1: crearOActualizarElectrolinera(...)
+Gestor --> Electrolinera : 4.2: <<create>> (si no existía)
+Gestor --> Electrolinera : 4.3: inicializar(idElectrolinera) (si no existía)
+Gestor --> Electrolinera : 4.4: editar(nombre, n1, n2, n3, tipo, ubicacion)
+Gestor --> Aplicacion : 4.5: ResultadoEdicion
+Aplicacion --> Operador : 4.6: "creada/modificada"
+
+@enduml

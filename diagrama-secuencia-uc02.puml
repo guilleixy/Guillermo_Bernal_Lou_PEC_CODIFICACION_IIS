@@ -1,0 +1,40 @@
+@startuml diagrama_secuencia_uc02
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de secuencia UC-02 Editar punto de recarga
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ParticipantPadding 18
+skinparam BoxPadding 10
+
+actor Operador as Op
+participant ":GesELECTRERA" as M
+participant ":Gestor" as G
+participant ":Electrolinera" as E
+
+Op -> M : 1: seleccionar "P"
+Op -> M : 2: datos completos\n(idElectrolinera, idPunto,\ncorriente, potencia, rodaja)
+M -> G : 3: existeElectrolinera(idElectrolinera)
+G --> M : 4: true
+M -> G : 5: editarPuntoRecarga(...)
+G -> E : 6: editarPunto(idPunto, corriente, potencia, rodaja)
+
+alt config inválida (RF-12) o excedería capacidad declarada (RF-13)
+  E --> G : 7.1: ResultadoEdicion(rechazado)
+  G --> M : 7.2: ResultadoEdicion(rechazado)
+  M --> Op : 7.3: mensaje de error
+else validaciones superadas
+  opt el punto no existe : alta
+    create P as ":Punto"
+    E -> P : 8.1: <<create>>
+    E -> P : 8.2: inicializar(idPunto)
+  end
+  E -> P : 9: editar(corriente, potencia, rodaja)
+  E --> G : 10: ResultadoEdicion(ok)
+  G --> M : 11: ResultadoEdicion(ok)
+  M --> Op : 12: "punto editado"
+end
+
+@enduml

@@ -1,0 +1,64 @@
+@startuml diagrama_actividad_uc03
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de actividad UC-03 Reservar punto de recarga
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam activity {
+  BackgroundColor #FAFAFA
+  BorderColor #000000
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #000000
+  FontName Helvetica
+}
+
+start
+
+:A1: capturar datos (idElectrolinera, nivel,\ndía, mes, año, hora, minuto, duración);
+
+if (D1: ¿la electrolinera existe?) then (no)
+  :A2: error "electrolinera no existe";
+  stop
+else (sí)
+endif
+
+:A3: solicitar confirmación al Operador;
+
+if (D2: ¿el Operador confirma?) then (no)
+  stop
+else (sí)
+endif
+
+:A4: inicializar i := 1;
+
+repeat
+  :A5: consultar nivel del punto[i];
+
+  if (D3: ¿nivel del punto[i] coincide con el solicitado?) then (sí)
+    :A6: calcular duración ajustada\n(múltiplo superior de la rodaja);
+    :A7: crear reserva con datos ajustados;
+    :A8: intentar insertar reserva en SecuenciaReservas\n(sin permitir solapamiento);
+
+    if (D4: ¿inserción exitosa?) then (sí)
+      :reserva conseguida;
+      break
+    else (no, solapamiento)
+      :A9: destruir reserva;
+    endif
+  else (no coincide)
+  endif
+
+  :A10: i := i + 1;
+repeat while (D5: ¿quedan más puntos? (i ≤ NumPuntosRecargaMax))
+
+if (D6: ¿reserva conseguida?) then (sí)
+  :A11: construir identificador y formatear datos;
+  :A12: mostrar confirmación con identificador y duración ajustada;
+else (no)
+  :A13: mostrar aviso "reserva no se puede realizar";
+endif
+
+stop
+
+@enduml

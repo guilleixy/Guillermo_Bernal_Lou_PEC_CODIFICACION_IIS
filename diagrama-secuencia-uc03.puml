@@ -1,0 +1,58 @@
+@startuml diagrama_secuencia_uc03
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de secuencia UC-03 Reservar punto de recarga
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ParticipantPadding 18
+skinparam BoxPadding 10
+
+actor Operador as Op
+participant ":GesELECTRERA" as M
+participant ":Gestor" as G
+participant ":Electrolinera" as E
+participant ":Punto[i]" as P
+participant ":SecuenciaReservas" as S
+
+Op -> M : 1: seleccionar "R"
+Op -> M : 2: datos completos\n(idElectrolinera, nivel, dia, mes,\nano, hora, minuto, duracion)
+M -> G : 3: existeElectrolinera(idElectrolinera)
+G --> M : 4: true
+M -> G : 5: reservarPuntoRecarga(...)
+G -> E : 6: reservarPuntoRecarga(nivel, ...)
+
+loop i en 1..NumPuntosRecargaMax, mientras no asignada
+  E -> P : 7: nivel()
+  P --> E : 8: Nivel
+  opt nivel del punto coincide con el solicitado
+    E -> P : 9: reservar(dia, mes, ano, hora, minuto, duracion)
+    create R as ":Reserva"
+    P -> R : 10: <<create>>
+    P -> R : 11: inicializar(..., duracionAjustada,\nidPunto, numeroSecuencial)
+    P -> S : 12: insertar(reserva, false)
+    alt insertada con éxito : reserva confirmada
+      S --> P : 13.1: true
+      P --> E : 13.2: reserva
+    else solapamiento detectado : seguir buscando
+      S --> P : 14.1: false
+      P -> R !! : 14.2: <<destroy>>
+      P --> E : 14.3: null
+    end
+  end
+end
+
+alt reserva conseguida
+  E --> G : 15.1: reserva
+  G --> M : 15.2: reserva
+  M -> R : 15.3: identificador(nivel)
+  R --> M : 15.4: "N3-4-0008-12-2025"
+  M --> Op : 15.5: confirmación con identificador,\nfecha, hora y duración ajustada
+else sin disponibilidad
+  E --> G : 16.1: null
+  G --> M : 16.2: null
+  M --> Op : 16.3: "reserva no se puede realizar"
+end
+
+@enduml

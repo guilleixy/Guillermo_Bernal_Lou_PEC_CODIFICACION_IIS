@@ -1,0 +1,38 @@
+@startuml diagrama_secuencia_uc05
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de secuencia UC-05 Listar servicio mensual de punto de recarga
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ParticipantPadding 18
+skinparam BoxPadding 10
+
+actor Operador as Op
+participant ":GesELECTRERA" as M
+participant ":Gestor" as G
+
+Op -> M : 1: seleccionar "M"
+Op -> M : 2: idElectrolinera, idPunto
+M -> G : 3: existeElectrolinera(idElectrolinera)
+G --> M : 4: true
+
+create C as ":CalendarioMes"
+M -> C : 5.1: <<create>>
+M -> C : 5.2: inicializar()
+M -> C : 5.3: establecerMargen(2)
+
+loop hasta que el Operador no quiera consultar otro mes
+  Op -> M : 6: mes, ano
+  M -> G : 7: construirEtiquetasOcupacionMensual(...)
+  G --> M : 8: EtiquetasOcupacion
+  M -> C : 9: imprimir(mes, ano, etiquetas)
+  M --> Op : 10: calendario y día de máxima ocupación
+  M --> Op : 11: "¿otro mes?"
+  Op -> M : 12: respuesta
+end
+
+M -> C !! : 13: <<destroy>>
+
+@enduml

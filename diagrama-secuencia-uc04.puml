@@ -1,0 +1,52 @@
+@startuml diagrama_secuencia_uc04
+' ---------------------------------------------------------------------------
+' GESELECTRERA-ADD-26 - Diagrama de secuencia UC-04 Listar reservas de electrolinera
+' ---------------------------------------------------------------------------
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ParticipantPadding 14
+skinparam BoxPadding 10
+
+actor Operador as Op
+participant ":GesELECTRERA" as M
+participant ":Gestor" as G
+participant ":Electrolinera" as E
+participant ":Punto[i]" as P
+participant ":SecAux" as S
+
+Op -> M : 1: seleccionar "L"
+Op -> M : 2: datos completos\n(idElectrolinera, mes, ano)
+M -> G : 3: existeElectrolinera(idElectrolinera)
+G --> M : 4: true
+M -> G : 5: listarReservasElectrolinera(...)
+G -> E : 6: listarReservasMes(mes, ano)
+
+note over E, S
+  Se crean tres SecuenciaReservas auxiliares
+  (una por nivel) para agrupar reservas
+end note
+E -> S : 7.1: <<create>> (×3, una por nivel)
+E -> S : 7.2: inicializar() (×3)
+
+loop para cada punto i con punto configurado
+  E -> P : 8: nivel()
+  P --> E : 9: Nivel
+  E -> P : 10: primeraReserva()
+  P --> E : 11: reserva
+  loop mientras no fin de reservas
+    opt reserva.mes == mes y reserva.ano == ano
+      E -> S : 12: insertar(reserva, true)\n(en la auxiliar del nivel)
+    end
+    E -> P : 13: siguienteReserva()
+    P --> E : 14: reserva
+  end
+end
+
+E -> S : 18: destruir() (×3 auxiliares)
+E --> G : 15: ListadoReservas
+G --> M : 16: ListadoReservas
+M --> Op : 17: presentación por nivel\n(o "no hay reservas")
+
+@enduml
