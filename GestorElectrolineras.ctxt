@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=GestorElectrolineras
+comment1.params=
+comment1.target=void\ inicializar()
+comment10.params=mes\ ano
+comment10.target=int\ diasEnMes(int,\ int)
+comment2.params=idElectrolinera
+comment2.target=boolean\ existeElectrolinera(int)
+comment3.params=idElectrolinera
+comment3.target=Electrolinera\ obtenerElectrolinera(int)
+comment4.params=idElectrolinera\ nombre\ n1\ n2\ n3\ tipo\ ubicacion
+comment4.target=ResultadoEdicion\ crearOActualizarElectrolinera(int,\ java.lang.String,\ int,\ int,\ int,\ TipoEstacion,\ Coordenadas)
+comment5.params=idElectrolinera
+comment5.target=boolean\ darDeBajaElectrolinera(int)
+comment6.params=idElectrolinera\ idPunto\ corriente\ potencia\ rodaja
+comment6.target=ResultadoEdicion\ editarPuntoRecarga(int,\ int,\ Corriente,\ int,\ int)
+comment7.params=idElectrolinera\ nivel\ dia\ mes\ ano\ hora\ minuto\ duracion
+comment7.target=Reserva\ reservarPuntoRecarga(int,\ Nivel,\ int,\ int,\ int,\ int,\ int,\ int)
+comment8.params=idElectrolinera\ mes\ ano
+comment8.target=ListadoReservas\ listarReservasElectrolinera(int,\ int,\ int)
+comment9.params=idElectrolinera\ idPunto\ mes\ ano
+comment9.target=EtiquetasOcupacion\ construirEtiquetasOcupacionMensual(int,\ int,\ int,\ int)
+numComments=11

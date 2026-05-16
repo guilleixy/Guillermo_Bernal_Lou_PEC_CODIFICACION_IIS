@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=PuntoRecarga
+comment1.params=id
+comment1.target=void\ inicializar(int)
+comment10.params=
+comment10.target=Reserva\ siguienteReserva()
+comment11.params=
+comment11.target=boolean\ finReservas()
+comment12.params=duracion
+comment12.target=int\ ajustarDuracion(int)
+comment2.params=
+comment2.target=void\ destruir()
+comment3.params=corriente\ potencia\ rodaja
+comment3.target=void\ editar(Corriente,\ int,\ int)
+comment4.params=
+comment4.target=Nivel\ nivel()
+comment5.params=
+comment5.target=int\ rodaja()
+comment6.params=
+comment6.target=int\ id()
+comment7.params=dia\ mes\ ano\ hora\ minuto\ duracion
+comment7.target=Reserva\ reservar(int,\ int,\ int,\ int,\ int,\ int)
+comment8.params=dia\ mes\ ano
+comment8.target=int\ ocupacionDia(int,\ int,\ int)
+comment9.params=
+comment9.target=Reserva\ primeraReserva()
+numComments=13

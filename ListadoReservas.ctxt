@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=ListadoReservas
+comment1.params=
+comment1.target=void\ inicializar()
+comment2.params=
+comment2.target=void\ destruir()
+comment3.params=reserva\ nivel
+comment3.target=void\ insertar(Reserva,\ Nivel)
+comment4.params=
+comment4.target=SecuenciaReservas\ getNivel1()
+comment5.params=
+comment5.target=SecuenciaReservas\ getNivel2()
+comment6.params=
+comment6.target=SecuenciaReservas\ getNivel3()
+numComments=7

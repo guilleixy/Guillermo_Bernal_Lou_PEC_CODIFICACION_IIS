@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Instante
+comment1.params=dia\ mes\ ano\ hora\ minuto
+comment1.target=Instante(int,\ int,\ int,\ int,\ int)
+comment2.params=
+comment2.target=int\ dia()
+comment3.params=
+comment3.target=int\ mes()
+comment4.params=
+comment4.target=int\ ano()
+comment5.params=
+comment5.target=int\ hora()
+comment6.params=
+comment6.target=int\ minuto()
+comment7.params=
+comment7.target=int\ enMinutosTotales()
+comment8.params=minutos
+comment8.target=Instante\ masMinutos(int)
+numComments=9

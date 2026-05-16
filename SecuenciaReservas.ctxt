@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=SecuenciaReservas
+comment1.params=
+comment1.target=void\ inicializar()
+comment2.params=
+comment2.target=void\ destruir()
+comment3.params=reserva\ permitirSolapamiento
+comment3.target=boolean\ insertar(Reserva,\ boolean)
+comment4.params=
+comment4.target=boolean\ estaVacia()
+comment5.params=
+comment5.target=Reserva\ primera()
+comment6.params=
+comment6.target=Reserva\ siguiente()
+comment7.params=
+comment7.target=boolean\ enFin()
+comment8.params=nueva
+comment8.target=boolean\ seSolapa(Reserva)
+comment9.params=reserva
+comment9.target=int\ posicionOrdenada(Reserva)
+numComments=10

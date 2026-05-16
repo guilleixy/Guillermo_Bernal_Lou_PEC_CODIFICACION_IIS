@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=EtiquetasOcupacion
+comment1.params=
+comment1.target=void\ inicializar()
+comment2.params=dia\ etiqueta
+comment2.target=void\ setEtiqueta(int,\ java.lang.String)
+comment3.params=dia
+comment3.target=java.lang.String\ getEtiqueta(int)
+comment4.params=
+comment4.target=java.lang.String[]\ getEtiquetas()
+comment5.params=dia
+comment5.target=void\ setDiaMayorOcupacion(int)
+comment6.params=
+comment6.target=int\ getDiaMayorOcupacion()
+numComments=7

@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=CalendarioMes
+comment1.params=
+comment1.target=void\ inicializar()
+comment2.params=margen
+comment2.target=void\ establecerMargen(int)
+comment3.params=mes\ ano\ etiquetas
+comment3.target=void\ imprimir(int,\ int,\ java.lang.String[])
+comment4.params=mes\ ano
+comment4.target=int\ diasEnMes(int,\ int)
+comment5.params=dia\ mes\ ano
+comment5.target=int\ diaDeLaSemana(int,\ int,\ int)
+comment6.params=n
+comment6.target=java.lang.String\ espacios(int)
+numComments=7

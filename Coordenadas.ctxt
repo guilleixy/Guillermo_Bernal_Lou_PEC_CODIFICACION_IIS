@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Coordenadas
+comment1.params=latitud\ longitud
+comment1.target=Coordenadas(double,\ double)
+comment2.params=
+comment2.target=double\ latitud()
+comment3.params=
+comment3.target=double\ longitud()
+numComments=4
