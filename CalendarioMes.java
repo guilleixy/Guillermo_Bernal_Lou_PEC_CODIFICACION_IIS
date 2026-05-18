@@ -54,8 +54,8 @@ public class CalendarioMes {
         }
     }
 
+    // Implementación de la fórmula de Zeller
     private int diaDeLaSemana(int dia, int mes, int ano) {
-        // Zeller simplificado: devuelve 0=Lunes ... 6=Domingo
         if (mes < 3) {
             mes += 12;
             ano--;
@@ -63,7 +63,7 @@ public class CalendarioMes {
         int k = ano % 100;
         int j = ano / 100;
         int h = (dia + (13 * (mes + 1)) / 5 + k + k / 4 + j / 4 + 5 * j) % 7;
-        // h: 0=Sabado,1=Domingo,2=Lunes,...,6=Viernes  -> convertir a 0=Lunes
+        // h ahora sería Sabado,1=Domingo,2=Lunes,...,6=Viernes. Convertimos a convertir a 0=Lunes
         int diaSemana = (h + 5) % 7;
         return diaSemana;
     }

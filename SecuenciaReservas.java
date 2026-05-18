@@ -45,6 +45,10 @@ public class SecuenciaReservas {
         return posIterador >= lista.size() - 1;
     }
 
+    /**
+     * Convierte el tiempo en una escala lineal de minutos. Con los intervalos,
+     * se determina si hay una intersección entre la nueva reserva y alguna de las existentes
+     */
     private boolean seSolapa(Reserva nueva) {
         int inicioNueva = nueva.dia() * 1440 + nueva.hora() * 60 + nueva.minuto();
         int finNueva = inicioNueva + nueva.duracion();
@@ -58,6 +62,9 @@ public class SecuenciaReservas {
         return false;
     }
 
+    /**
+     * Determina donde insertar una nueva reserva para que la lista se mantenga cronológicamente ordenada
+     */
     private int posicionOrdenada(Reserva reserva) {
         int inicioNueva = reserva.dia() * 1440 + reserva.hora() * 60 + reserva.minuto();
         for (int i = 0; i < lista.size(); i++) {

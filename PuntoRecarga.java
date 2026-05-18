@@ -55,6 +55,9 @@ public class PuntoRecarga {
         return null;
     }
 
+    /**
+     * Calcula la ocupación en un día, teniendo en cuenta que una reserva puede hacerse entre dos días
+     */
     public int ocupacionDia(int dia, int mes, int ano) {
         int totalMinutos = 0;
         int inicioDia = dia * 1440;

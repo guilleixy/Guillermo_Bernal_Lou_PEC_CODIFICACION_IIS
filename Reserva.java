@@ -26,6 +26,7 @@ public class Reserva {
         if (nivel == Nivel.Nivel1) numNivel = 1;
         else if (nivel == Nivel.Nivel2) numNivel = 2;
         else if (nivel == Nivel.Nivel3) numNivel = 3;
+        // Devuelve la cadena formateada
         return String.format("N%d-%d-%04d-%02d-%d", numNivel, idPunto, numeroSecuencial, mes, ano);
     }
 
@@ -44,5 +45,5 @@ public class Reserva {
     public int minuto() { return minuto; }
     public int duracion() { return duracion; }
     public int idPunto() { return idPunto; }
-    public int numeroSecuencial() { return numeroSecuencial; }
+        public int numeroSecuencial() { return numeroSecuencial; }
 }
