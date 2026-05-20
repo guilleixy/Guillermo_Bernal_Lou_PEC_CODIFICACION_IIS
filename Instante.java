@@ -20,10 +20,6 @@ public class Instante {
     public int hora() { return hora; }
     public int minuto() { return minuto; }
 
-    public int enMinutosTotales() {
-        return dia * 1440 + hora * 60 + minuto;
-    }
-
     public Instante masMinutos(int minutos) {
         int totalMinutos = hora * 60 + minuto + minutos;
         int diasExtra = totalMinutos / 1440;

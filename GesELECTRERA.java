@@ -28,9 +28,6 @@ public class GesELECTRERA {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // UC-01: Editar electrolinera
-    // -------------------------------------------------------------------------
     private void editarElectrolinera() {
         System.out.print("Identificador de electrolinera (1-10): ");
         int id = leerEntero();
@@ -103,9 +100,6 @@ public class GesELECTRERA {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // UC-02: Editar punto de recarga
-    // -------------------------------------------------------------------------
     private void editarPuntoRecarga() {
         System.out.print("Identificador de electrolinera (1-10): ");
         int idE = leerEntero();
@@ -153,9 +147,6 @@ public class GesELECTRERA {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // UC-03: Reservar punto de recarga
-    // -------------------------------------------------------------------------
     private void reservarPuntoRecarga() {
         System.out.print("Identificador de electrolinera (1-10): ");
         int idE = leerEntero();
@@ -176,7 +167,7 @@ public class GesELECTRERA {
         int dia = leerEntero();
         System.out.print("Mes: ");
         int mes = leerEntero();
-        System.out.print("Anio: ");
+        System.out.print("Año: ");
         int ano = leerEntero();
         System.out.print("Hora (0-23): ");
         int hora = leerEntero();
@@ -204,9 +195,6 @@ public class GesELECTRERA {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // UC-04: Listar reservas de electrolinera
-    // -------------------------------------------------------------------------
     private void listarReservasElectrolinera() {
         System.out.print("Identificador de electrolinera (1-10): ");
         int idE = leerEntero();
@@ -217,7 +205,7 @@ public class GesELECTRERA {
 
         System.out.print("Mes: ");
         int mes = leerEntero();
-        System.out.print("Anio: ");
+        System.out.print("Año: ");
         int ano = leerEntero();
 
         ListadoReservas listado = gestor.listarReservasElectrolinera(idE, mes, ano);
@@ -252,9 +240,6 @@ public class GesELECTRERA {
         return true;
     }
 
-    // -------------------------------------------------------------------------
-    // UC-05: Listar servicio mensual de punto
-    // -------------------------------------------------------------------------
     private void listarServicioMensualPunto() {
         System.out.print("Identificador de electrolinera (1-10): ");
         int idE = leerEntero();
@@ -278,7 +263,7 @@ public class GesELECTRERA {
         while (seguir) {
             System.out.print("Mes: ");
             int mes = leerEntero();
-            System.out.print("Anio: ");
+            System.out.print("Año: ");
             int ano = leerEntero();
 
             EtiquetasOcupacion etiquetas = gestor.construirEtiquetasOcupacionMensual(idE, idP, mes, ano);
@@ -291,9 +276,6 @@ public class GesELECTRERA {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Auxiliares de lectura
-    // -------------------------------------------------------------------------
     private void mostrarMenu() {
         System.out.println();
         System.out.println("=== GesELECTRERA ===");
