@@ -22,6 +22,7 @@ comment7.params=dia\ mes\ ano\ hora\ minuto\ duracion
 comment7.target=Reserva\ reservar(int,\ int,\ int,\ int,\ int,\ int)
 comment8.params=dia\ mes\ ano
 comment8.target=int\ ocupacionDia(int,\ int,\ int)
+comment8.text=\r\n\ Calcula\ la\ ocupaci\u00F3n\ en\ un\ d\u00EDa,\ teniendo\ en\ cuenta\ que\ una\ reserva\ puede\ hacerse\ entre\ dos\ d\u00EDas\r\n
 comment9.params=
 comment9.target=Reserva\ primeraReserva()
 numComments=13

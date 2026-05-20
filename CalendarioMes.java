@@ -18,14 +18,14 @@ public class CalendarioMes {
     public void imprimir(int mes, int ano, String[] etiquetas) {
         String margen = espacios(margenIzquierdo);
         System.out.println(margen + NOMBRES_MESES[mes] + " " + ano);
-        System.out.println(margen + " L   M   X   J   V   S   D");
+        System.out.println(margen + "  L    M    X    J    V    S    D");
 
         int diasDelMes = diasEnMes(mes, ano);
         int diaSemanaInicio = diaDeLaSemana(1, mes, ano);
 
         System.out.print(margen);
         for (int i = 0; i < diaSemanaInicio; i++) {
-            System.out.print("    ");
+            System.out.print("     ");
         }
 
         int columna = diaSemanaInicio;
@@ -63,7 +63,7 @@ public class CalendarioMes {
         int k = ano % 100;
         int j = ano / 100;
         int h = (dia + (13 * (mes + 1)) / 5 + k + k / 4 + j / 4 + 5 * j) % 7;
-        // h ahora sería Sabado,1=Domingo,2=Lunes,...,6=Viernes. Convertimos a convertir a 0=Lunes
+        // h ahora sería sabado=0,domingo=1,lunes=2,... Convertimos a lunes=0
         int diaSemana = (h + 5) % 7;
         return diaSemana;
     }

@@ -45,5 +45,5 @@ public class Reserva {
     public int minuto() { return minuto; }
     public int duracion() { return duracion; }
     public int idPunto() { return idPunto; }
-        public int numeroSecuencial() { return numeroSecuencial; }
+    public int numeroSecuencial() { return numeroSecuencial; }
 }

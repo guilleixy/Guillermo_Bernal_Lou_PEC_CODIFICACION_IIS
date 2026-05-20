@@ -22,8 +22,8 @@ public class GesELECTRERA {
                 case "R": reservarPuntoRecarga(); break;
                 case "L": listarReservasElectrolinera(); break;
                 case "M": listarServicioMensualPunto(); break;
-                case "S": continuar = false; System.out.println("Hasta luego."); break;
-                default: System.out.println("Opcion no valida. Introduzca E, P, R, L, M o S."); break;
+                case "S": continuar = false; System.out.println("¡Hasta la próxima!"); break;
+                default: System.out.println("Opcion no valida. Las opciones son E, P, R, L, M o S."); break;
             }
         }
     }
@@ -43,11 +43,11 @@ public class GesELECTRERA {
             return;
         }
 
-        System.out.print("Numero de puntos Nivel 1 (AC 2-4 kW): ");
+        System.out.print("Numero de puntos Nivel 1 (Lento): ");
         int n1 = leerEntero();
-        System.out.print("Numero de puntos Nivel 2 (AC 11-22 kW): ");
+        System.out.print("Numero de puntos Nivel 2 (Semi-rápido): ");
         int n2 = leerEntero();
-        System.out.print("Numero de puntos Nivel 3 (DC 50-300 kW): ");
+        System.out.print("Numero de puntos Nivel 3 (Rápido): ");
         int n3 = leerEntero();
 
         if (n1 < 0 || n2 < 0 || n3 < 0) {
@@ -85,7 +85,7 @@ public class GesELECTRERA {
         double longitud = leerDouble();
         Coordenadas ubicacion = new Coordenadas(latitud, longitud);
 
-        System.out.print("Confirma la operacion? (S/N): ");
+        System.out.print("¿Son correctos los datos? (S/N): ");
         String conf = teclado.nextLine().trim().toUpperCase();
         if (!conf.equals("S")) {
             System.out.println("Operacion cancelada.");
@@ -132,7 +132,7 @@ public class GesELECTRERA {
             return;
         }
 
-        System.out.print("Confirma la operacion? (S/N): ");
+        System.out.print("¿Son correctos los datos? (S/N): ");
         String conf = teclado.nextLine().trim().toUpperCase();
         if (!conf.equals("S")) {
             System.out.println("Operacion cancelada.");
@@ -278,13 +278,13 @@ public class GesELECTRERA {
 
     private void mostrarMenu() {
         System.out.println();
-        System.out.println("=== GesELECTRERA ===");
-        System.out.println("  E - Editar electrolinera");
-        System.out.println("  P - Editar punto de recarga");
-        System.out.println("  R - Reservar punto de recarga");
-        System.out.println("  L - Listar reservas de electrolinera");
-        System.out.println("  M - Listar servicio mensual de punto");
-        System.out.println("  S - Salir");
+        System.out.println("GesELECTRERA: Gestión de electrolineras");
+        System.out.println("   Editar electrolinera                  (Pulsar E)");
+        System.out.println("   Editar punto de recarga               (Pulsar P)");
+        System.out.println("   Reservar punto de recarga             (Pulsar R)");
+        System.out.println("   Listar reservas de electrolinera      (Pulsar L)");
+        System.out.println("   Listar servicio mensual de punto      (Pulsar M)");
+        System.out.println("   Salir                                 (Pulsar S)");
         System.out.print("Opcion: ");
     }
 
